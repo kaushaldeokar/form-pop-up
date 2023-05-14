@@ -1,26 +1,31 @@
 import React, { useState, useEffect } from 'react'
 import { Grid } from '@mui/material'
 import { TextField } from '@mui/material';
+import { UseForm, Form } from '../Components/UseForm';
+import { FormControl, RadioGroup, FormLabel, Radio, FormControlLabel } from '@mui/material';
+
 const initialValues = {
     BusinessDescription: "",
     email: "",
     phoneNo: "",
+    gender:""
 
 }
 
 const EmployeeForm = () => {
 
-    
-    const handleInputChange=(e)=>{
-        const {name ,value}=e.target;
-        setValues({
-            ...values,
-            [name]:value,
-        })
-    }
-    
+
+
+    const {
+        values, setValues, handleInputChange
+    } = UseForm(initialValues);
+
+
+
+
     return (
-        <div>
+
+        <Form>
 
             <Grid container spacing={2}>
                 <Grid item xs={6} md={8}>
@@ -44,9 +49,30 @@ const EmployeeForm = () => {
 
                 </Grid>
 
+                <Grid item xs={6} md={8}>
+
+                    <FormControl>
+                        <RadioGroup row={true}
+                            name="gender"
+                            value={values.gender}
+                            onChange={handleInputChange}
+                        >
+                            <FormLabel>Gender</FormLabel>
+                            <FormControlLabel value="Male" control={<Radio />} label="Male"></FormControlLabel>
+                            <FormControlLabel value="Female" control={<Radio />} label="Female"></FormControlLabel>
+                        </RadioGroup>
+                    </FormControl>
+
+                </Grid>
+
+
+
             </Grid>
 
-        </div>
+        </Form>
+
+
+
     )
 }
 
